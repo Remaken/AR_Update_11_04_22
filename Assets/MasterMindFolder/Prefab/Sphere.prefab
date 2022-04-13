@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1624515676212325822}
   - component: {fileID: 2377693445752628052}
   - component: {fileID: 3429886017686151929}
+  - component: {fileID: 6973613202987852164}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Sphere
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   couleurActuelle: 0
   numSphere: 4
+  couleurSphereActuelle: 
 --- !u!33 &1624515676212325822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110,3 +112,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6973613202987852164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6425057883122847423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1477cfe204bae1b4595b021abe098b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

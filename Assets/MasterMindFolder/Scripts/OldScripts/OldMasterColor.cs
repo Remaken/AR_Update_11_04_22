@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MasterColor : MonoBehaviour
+public class OldMasterColor : MonoBehaviour
 {
+    
     public GameObject[] colors;
     public GameObject[] boulePositions;
     //public InterfaceManager interManager;

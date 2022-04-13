@@ -6,28 +6,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
 
-public class GuessColor : MonoBehaviour
+public class OldGuessColor : MonoBehaviour
 
 {
-    public MasterColor masterColorManager;
-    public Sphere sphereManager;
-    public Lignes[] lignes;
+    public OldMasterColor masterColorManager;
+    public OldSphere sphereManager;
+    public OldLignes[] lignes;
+    public OldSphere[] boulepositions;
     private int _ligneActuelle=0;
     private int _testActuel = 0;
     private bool _victoire = false;
-    /*private GameObject _bouleMaterial;*/
-    private int[] positionActuelle= {0,1,2,3} ;
+    //private int[] positionActuelle= {0,1,2,3} ;
     private bool[] bonEmplacement;
     private bool[] bonneCouleur;
     private int currentSphere;
     private int previousSphere=1;
     private Color couleurDeLaBoule;
-
-
-    void Start()
-    {
-        Verifification();
-    }
+    
 
     private void Update()
     {
@@ -38,6 +33,7 @@ public class GuessColor : MonoBehaviour
         }
     }
 
+    /*
     public void Verifification()
 
     {
@@ -51,7 +47,7 @@ public class GuessColor : MonoBehaviour
             /*if ((lignes[_testActuel].boulepositions[i]==masterColorManager.randomSolution[masterColorManager.randomSolution.Length]))
             {
                 bonneCouleur[i] = true;
-            }*/
+            }#1#
         }
          if (bonneCouleur[0]||bonneCouleur[1]||bonneCouleur[2]||bonneCouleur[3]) 
          {
@@ -79,9 +75,10 @@ public class GuessColor : MonoBehaviour
             print("c'est pas la bonne réponse");
             LignSwitcher(); 
          }
-         */
+         #1#
         
     }
+    */
 
     public void LignSwitcher()
     {
@@ -104,9 +101,9 @@ public class GuessColor : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                currentSphere= hit.collider.gameObject.GetComponent<Sphere>().numSphere;
+                currentSphere= hit.collider.gameObject.GetComponent<OldSphere>().numSphere;
 
-                if (( hit.collider.gameObject.GetComponent<Sphere>() !=null))//&&(currentSphere==previousSphere))
+                if (( hit.collider.gameObject.GetComponent<OldSphere>() !=null))//&&(currentSphere==previousSphere))
                 {
                    
                     if ((currentSphere!=previousSphere)||(sphereManager.couleurActuelle>=masterColorManager.colors.Length))

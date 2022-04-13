@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InterfaceManager : MonoBehaviour
+public class OldInterfaceManager : MonoBehaviour
 {
-    public GuessColor guessManager;
-    public MasterColor masterManager;
+    public OldGuessColor guessManager;
+    public OldMasterColor masterManager;
     // Start is called before the first frame update
     void Start()
     {

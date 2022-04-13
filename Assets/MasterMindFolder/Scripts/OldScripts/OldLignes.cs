@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lignes : MonoBehaviour
+public class OldLignes : MonoBehaviour
 {
-    public Sphere[] boulepositions;
     
 }
