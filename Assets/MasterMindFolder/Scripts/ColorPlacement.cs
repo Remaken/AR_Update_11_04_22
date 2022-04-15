@@ -185,11 +185,9 @@ public class ColorPlacement : MonoBehaviour
         RaycastHit Hit;
         if (Physics.Raycast(ray, out Hit))
         {
-            Debug.Log("raycast");
             _ballDetected = Hit.collider.gameObject;
             if (_ballDetected.CompareTag("Sphere"))
             {
-             
                 _ballDetected.GetComponent<MeshRenderer>().material.SetColor("_Color",selectedColor);
             }
         }

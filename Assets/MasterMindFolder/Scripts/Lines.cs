@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR.ARFoundation.Samples;
 
 public class Lines : MonoBehaviour
 {
   public GameObject[] LineRows;
   [SerializeField] private LinePositions ballManager;
-  private int _currentLine = 0 ;
+  public int currentLine = 0 ;
   private int _maxLines = 11;
   private  Collider _ballCollider;
 
@@ -20,9 +21,10 @@ public class Lines : MonoBehaviour
     }
   }
 
+
   private void Start()
   {
-    LineRows[_currentLine].SetActive(true);
+    LineRows[currentLine].SetActive(true);
     
   }
 
@@ -36,22 +38,22 @@ public class Lines : MonoBehaviour
   }
   private void SwitchActiveLine()
   {
-    if (_currentLine<_maxLines)
+    if (currentLine<_maxLines && LineRows[currentLine].GetComponent<LinePositions>().CanVerify())
     {
-      for (int i = 0; i < ballManager.BallPositions.Length; i++)
-      {
-        _ballCollider = LineRows[_currentLine].GetComponent<LinePositions>().BallPositions[i].GetComponent<Collider>();
-        _ballCollider.enabled = true;
-      }
-      _currentLine++;
-      Switcher();
+        for (int i = 0; i < ballManager.BallPositions.Length; i++)
+        {
+          _ballCollider = LineRows[currentLine].GetComponent<LinePositions>().BallPositions[i].GetComponent<Collider>();
+          _ballCollider.enabled = true;
+        }
+        currentLine++;
+         Switcher();
     }
   }
 
   private void Switcher()
   {
-    LineRows[_currentLine].SetActive(true);
-    if (_currentLine>=1 && _currentLine<_maxLines)
+    LineRows[currentLine].SetActive(true);
+    if (currentLine>=1 && currentLine<_maxLines)
     {
       Occult();
     }
@@ -61,9 +63,9 @@ public class Lines : MonoBehaviour
   {
     for (int i = 0; i < ballManager.BallPositions.Length; i++)
     {
-      _ballCollider = LineRows[_currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<SphereCollider>();
+      _ballCollider = LineRows[currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<SphereCollider>();
       _ballCollider.enabled = false;
     }
-    
   }
+
 }
