@@ -67,7 +67,7 @@ private void Start()
  {
   colorChecked = new bool[]{false,false,false,false} ;
   int goodColorPlaced = 0;
-  int goodColorFound = 0;
+  int colorBadPlaced = 0;
   var lineRow = _playerValidationManager.lineRows[_playerValidationManager.currentLine];
   var linePositions = lineRow.GetComponent<LinePositions>();
 
@@ -76,7 +76,6 @@ private void Start()
   {
    if (_solutionColors[i] == _playerValidation[i])
    {
-    goodColorFound++;
     goodColorPlaced++;
     colorChecked[i] = true;
    }
@@ -88,22 +87,26 @@ private void Start()
    {
     if (colorChecked[j] == false && _playerValidation[i] == _solutionColors[j])
     {
-     goodColorFound++;
+     colorBadPlaced++;
      colorChecked[j] = true;
     }
    }
   }
-  print(goodColorPlaced +"bien placé");
 
-   if (goodColorFound>0 && goodColorFound>goodColorPlaced)
+  for (int i = 0; i < linePositions.Pins.Length; i++)
+  {
+   if (i<goodColorPlaced)
    {
-     linePositions.Pins[goodColorFound-1].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.white);
+     linePositions.Pins[i].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.black);
    }
-
-   if (goodColorPlaced>0)
+   else
    {
-    linePositions.Pins[goodColorPlaced-1].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.black);
+    if (i<goodColorPlaced+colorBadPlaced)
+    {
+     linePositions.Pins[i].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.white);
+    }
    }
+  }
   
   if (goodColorPlaced == 4)
   {
