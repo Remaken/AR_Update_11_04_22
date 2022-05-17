@@ -7,7 +7,7 @@ using UnityEngine.XR.ARFoundation.Samples;
 
 public class Lines : MonoBehaviour
 {
-  public GameObject[] LineRows;
+  public GameObject[] lineRows = new GameObject[12] ;
   [SerializeField] private LinePositions ballManager;
   public int currentLine = 0 ;
   private int _maxLines = 11;
@@ -15,16 +15,16 @@ public class Lines : MonoBehaviour
 
   private void Awake()
   {
-    for (int i = 0; i < LineRows.Length; i++)
+    for (int i = 0; i < lineRows.Length; i++)
     {
-      LineRows[i].SetActive(false);
+      lineRows[i].SetActive(false);
     }
   }
 
 
   private void Start()
   {
-    LineRows[currentLine].SetActive(true);
+    lineRows[currentLine].SetActive(true);
     
   }
 
@@ -38,13 +38,14 @@ public class Lines : MonoBehaviour
   }
   private void SwitchActiveLine()
   {
-    if (currentLine<_maxLines && LineRows[currentLine].GetComponent<LinePositions>().CanVerify())
+    if (currentLine<_maxLines && lineRows[currentLine].GetComponent<LinePositions>().CanVerify())
     {
         for (int i = 0; i < ballManager.BallPositions.Length; i++)
         {
-          _ballCollider = LineRows[currentLine].GetComponent<LinePositions>().BallPositions[i].GetComponent<Collider>();
+          _ballCollider = lineRows[currentLine].GetComponent<LinePositions>().BallPositions[i].GetComponent<Collider>();
           _ballCollider.enabled = true;
         }
+
         currentLine++;
          Switcher();
     }
@@ -52,7 +53,7 @@ public class Lines : MonoBehaviour
 
   private void Switcher()
   {
-    LineRows[currentLine].SetActive(true);
+    lineRows[currentLine].SetActive(true);
     if (currentLine>=1 && currentLine<_maxLines)
     {
       Occult();
@@ -63,7 +64,7 @@ public class Lines : MonoBehaviour
   {
     for (int i = 0; i < ballManager.BallPositions.Length; i++)
     {
-      _ballCollider = LineRows[currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<SphereCollider>();
+      _ballCollider = lineRows[currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<SphereCollider>();
       _ballCollider.enabled = false;
     }
   }

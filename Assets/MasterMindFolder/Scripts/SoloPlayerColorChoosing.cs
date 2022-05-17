@@ -1,15 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class SoloPlayerColorChoosing : MonoBehaviour
 {
+    public delegate Action<Color[]> SolutionColors();
+
+    public static event SolutionColors Solution;
+    
+    
     private Color[] colors = { Color.blue, Color.green, Color.yellow, Color.red, };
     [SerializeField] private Transform[] _solutionPositions;
-    public Color[] randomSolution = new Color[3] ;
+    public Color[] randomSolution = new Color[4] ;
     [SerializeField] private GameObject _spherePrefab;
-    public GameObject[] _ballPlacement;
+    private GameObject[] _ballPlacement = new GameObject[4];
+
     void Start()
+    {
+        CreateSolution();
+    }
+
+
+
+    private void CreateSolution()
     {
         ColorChoosing();
         ColorPlacing();
@@ -35,5 +51,6 @@ public class SoloPlayerColorChoosing : MonoBehaviour
         
         _ballPlacement[3] = Instantiate(_spherePrefab,this._solutionPositions[3].transform) ;
         _ballPlacement[3].GetComponent<MeshRenderer>().material.color = randomSolution[3];
+
     }
 }

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LinePositions : MonoBehaviour
 {
-    public GameObject[] BallPositions;
+    public GameObject[] BallPositions = new GameObject[4];
     private bool[] sphereColorsChanged = {false, false, false, false};
-    private int _colorsChanged = 0;
+    public int colorsChanged = 0;
+    public GameObject[] Pins = new GameObject[4];
 
     private void Update()
     {
@@ -21,14 +23,14 @@ public class LinePositions : MonoBehaviour
             if (BallPositions[i].gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color")!=Color.black && sphereColorsChanged[i]==false)
             {
                 sphereColorsChanged[i] = true;
-                _colorsChanged++;
+                colorsChanged++;
             }
         }
     }
 
     public bool CanVerify()
     {
-        if (_colorsChanged >= 4)
+        if (colorsChanged >= 4)
         {
             return true;
         }
