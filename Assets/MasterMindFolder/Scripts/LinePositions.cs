@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +5,7 @@ using UnityEngine.Serialization;
 
 public class LinePositions : MonoBehaviour
 {
+<<<<<<< HEAD
     public GameObject[] BallPositions = new GameObject[4];
     private bool[] sphereColorsChanged = {false, false, false, false};
     public int colorsChanged = 0;
@@ -37,4 +37,7 @@ public class LinePositions : MonoBehaviour
         return false;
     }
 
+=======
+    public GameObject[] BallPositions;
+>>>>>>> parent of 212c032 (TestCommit)
 }

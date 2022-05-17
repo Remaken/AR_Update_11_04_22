@@ -13,6 +13,7 @@ public class Verification : MonoBehaviour
  public static event ButtonTouched LineSwitcher;
 
  [SerializeField] private Button _verificationButton;
+<<<<<<< HEAD
 
  [SerializeField] private Lines _playerValidationManager;
  [SerializeField] private SoloPlayerColorChoosing _solutionColorManager;
@@ -129,4 +130,12 @@ private void Start()
    {
     
    }
+=======
+ 
+
+   public void ButtonPressed()
+    {
+     LineSwitcher?.Invoke();
+    }
+>>>>>>> parent of 212c032 (TestCommit)
 }
