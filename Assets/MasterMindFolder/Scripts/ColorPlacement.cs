@@ -191,17 +191,5 @@ public class ColorPlacement : MonoBehaviour
                 _ballDetected.GetComponent<MeshRenderer>().material.SetColor("_Color",selectedColor);
             }
         }
-
-        /*RaycastHit hitted;
-        Ray raytracer = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(raytracer, out hitted))
-        {
-            ballFound = hitted.collider.gameObject.GetComponent<SphereColors>().gameObject;
-
-            if ((hitted.collider.gameObject.GetComponent<OldSphere>() != null))
-            {
-                ballFound.GetComponent<MeshRenderer>().material.color = selectedColor;
-            }
-        }*/
     }
 }
