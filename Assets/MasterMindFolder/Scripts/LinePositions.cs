@@ -8,9 +8,14 @@ public class LinePositions : MonoBehaviour
 {
     public GameObject[] BallPositions = new GameObject[4];
     private bool[] sphereColorsChanged = {false, false, false, false};
+    private Color _baseColor;
     public int colorsChanged = 0;
     public GameObject[] Pins = new GameObject[4];
 
+    private void Start()
+    { 
+        _baseColor = BallPositions[0].gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color");
+    }
     private void Update()
     {
         ColorChanged();
@@ -20,7 +25,7 @@ public class LinePositions : MonoBehaviour
     {
         for (int i = 0; i < BallPositions.Length; i++)
         {
-            if (BallPositions[i].gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color")!=Color.black && sphereColorsChanged[i]==false)
+            if (BallPositions[i].gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color")!=_baseColor && sphereColorsChanged[i]==false)
             {
                 sphereColorsChanged[i] = true;
                 colorsChanged++;

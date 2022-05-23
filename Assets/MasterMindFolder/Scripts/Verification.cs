@@ -16,12 +16,17 @@ public class Verification : MonoBehaviour
 
  [SerializeField] private Lines _playerValidationManager;
  [SerializeField] private SoloPlayerColorChoosing _solutionColorManager;
+ [SerializeField] private GameObject _solutionHider;
  private Color[] _solutionColors = new Color[4];
  private Color[] _playerValidation = new Color[4];
  private bool _victory = false;
  private bool[] colorChecked;
 
-private void Start()
+ private void Awake()
+ {
+ // _solutionHider.SetActive(true);
+ }
+ private void Start()
  {
   SolutionColorConverter();
  }
@@ -67,55 +72,69 @@ private void Start()
  {
   colorChecked = new bool[]{false,false,false,false} ;
   int goodColorPlaced = 0;
-  int colorBadPlaced = 0;
+  int goodColorBadPlacement = 0;
   var lineRow = _playerValidationManager.lineRows[_playerValidationManager.currentLine];
   var linePositions = lineRow.GetComponent<LinePositions>();
-
-
+  
   for (int i = 0; i < _solutionColors.Length; i++)
   {
-   if (_solutionColors[i] == _playerValidation[i])
+   if (_playerValidation[i] == _solutionColors[i])
    {
-    goodColorPlaced++;
     colorChecked[i] = true;
+    goodColorPlaced++;
    }
   }
   for (int i = 0; i < _solutionColors.Length; i++)
   {
-
-   for (int j = 0; j < colorChecked.Length; j++)
+   if (!colorChecked[i])
    {
-    if (colorChecked[j] == false && _playerValidation[i] == _solutionColors[j])
+    for (int j = 0; j < colorChecked.Length; j++)
     {
-     colorBadPlaced++;
-     colorChecked[j] = true;
+     if ( _playerValidation[i] == _solutionColors[j])
+     {
+      colorChecked[i] = true;
+      goodColorBadPlacement++;
+     }
     }
    }
   }
+  print(goodColorPlaced + " " + goodColorBadPlacement);
 
   for (int i = 0; i < linePositions.Pins.Length; i++)
   {
+   int PinWithGoodColorButBadPlaced = goodColorPlaced + goodColorBadPlacement;
+ 
    if (i<goodColorPlaced)
    {
-     linePositions.Pins[i].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.black);
+    linePositions.Pins[i].SetActive(true);
+    linePositions.Pins[i].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.black);
    }
    else
    {
-    if (i<goodColorPlaced+colorBadPlaced)
+    if (i<PinWithGoodColorButBadPlaced)
     {
+     if (!linePositions.Pins[i].activeInHierarchy)
+     {
+      linePositions.Pins[i].SetActive(true);
+     }
      linePositions.Pins[i].GetComponent<MeshRenderer>().material.SetColor("_Color",Color.white);
     }
    }
   }
   
+  if (_victory==false)
+  {
+   LineSwitcher?.Invoke();
+  }
   if (goodColorPlaced == 4)
   {
    _victory = true;
+   _solutionHider.SetActive(false);
   }
-  //else
-     {
-      LineSwitcher?.Invoke();
-     }
+  if (_playerValidationManager.currentLine>=12)
+  {
+   _solutionHider.SetActive(false);
+  }
  }
 
    private void Winner()

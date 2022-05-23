@@ -45,7 +45,6 @@ public class Lines : MonoBehaviour
           _ballCollider = lineRows[currentLine].GetComponent<LinePositions>().BallPositions[i].GetComponent<Collider>();
           _ballCollider.enabled = true;
         }
-
         currentLine++;
          Switcher();
     }
@@ -64,7 +63,7 @@ public class Lines : MonoBehaviour
   {
     for (int i = 0; i < ballManager.BallPositions.Length; i++)
     {
-      _ballCollider = lineRows[currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<SphereCollider>();
+      _ballCollider = lineRows[currentLine-1].GetComponent<LinePositions>().BallPositions[i].GetComponent<MeshCollider>();
       _ballCollider.enabled = false;
     }
   }
