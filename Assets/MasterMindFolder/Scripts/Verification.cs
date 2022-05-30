@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,8 @@ public class Verification : MonoBehaviour
  public delegate void ButtonTouched();
 
  public static event ButtonTouched LineSwitcher;
+
+ public static event ButtonTouched CreateSolution;
 
  [SerializeField] private Button _verificationButton;
 
@@ -22,10 +23,16 @@ public class Verification : MonoBehaviour
  private bool _victory = false;
  private bool[] colorChecked;
 
- private void Awake()
+
+ private void OnEnable()
  {
- // _solutionHider.SetActive(true);
+  MasterMindStarter.StartGame += HideSolution;
  }
+ private void OnDisable()
+ {
+  MasterMindStarter.StartGame -= HideSolution;
+ }
+ 
  private void Start()
  {
   SolutionColorConverter();
@@ -90,7 +97,7 @@ public class Verification : MonoBehaviour
    {
     for (int j = 0; j < colorChecked.Length; j++)
     {
-     if ( _playerValidation[i] == _solutionColors[j])
+     if (!colorChecked[i] && _playerValidation[j] == _solutionColors[i])
      {
       colorChecked[i] = true;
       goodColorBadPlacement++;
@@ -136,7 +143,10 @@ public class Verification : MonoBehaviour
    _solutionHider.SetActive(false);
   }
  }
-
+   private void HideSolution()
+   {
+    _solutionHider.SetActive(true);
+   }
    private void Winner()
    {
     if (_victory== true)
@@ -145,9 +155,4 @@ public class Verification : MonoBehaviour
     }
    }
 
-
-   private void VisualIndicator()
-   {
-    
-   }
 }

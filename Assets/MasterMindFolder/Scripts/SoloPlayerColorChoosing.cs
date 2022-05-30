@@ -18,11 +18,14 @@ public class SoloPlayerColorChoosing : MonoBehaviour
     [SerializeField] private GameObject _spherePrefab;
     private GameObject[] _ballPlacement = new GameObject[4];
 
-    void Start()
+    private void OnEnable()
     {
-        CreateSolution();
+        Verification.CreateSolution += CreateSolution;
     }
-
+    private void OnDisable()
+    {
+        Verification.CreateSolution -= CreateSolution;
+    }
 
 
     private void CreateSolution()

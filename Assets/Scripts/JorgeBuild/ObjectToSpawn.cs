@@ -44,6 +44,8 @@ public class ObjectToSpawn : MonoBehaviour
             for (int i = 0; i < args.added.Count; i++)
             {
                 _spawnMasterMindButton.gameObject.SetActive(true);
+                _objectSpawned = Instantiate(_objectsToSpawn[0]);
+                _masterMindStarted = true;
             }
         }
     }
@@ -84,11 +86,10 @@ public class ObjectToSpawn : MonoBehaviour
         }
     }
     
+    /*
     public void MasterMindButtonSpawn()
     {
-        _masterMindStarted = true;
-        _objectSpawned = Instantiate(_objectsToSpawn[0]);
         _spawnMasterMindButton.gameObject.SetActive(false);
         _spawnButtonTree.gameObject.SetActive(false);
-    }
+    }*/
 }
