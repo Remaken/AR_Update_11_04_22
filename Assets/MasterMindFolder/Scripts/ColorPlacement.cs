@@ -180,8 +180,8 @@ public class ColorPlacement : MonoBehaviour
 
     private void ColorPlacing()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
         RaycastHit Hit;
         if (Physics.Raycast(ray, out Hit))
         {
